@@ -19,17 +19,21 @@ def test_ozon():
 
     # Заполнить поле поиска
     page = OzonMainPage(driver=driver)
-    page.fill_input(xpath=page.INPUT_SEARCH, value='Xiaomi')
+    #page.fill_input(xpath=page.INPUT_SEARCH, value='Xiaomi')
 
     # Кликнуть кнопку найти
-    page.click(xpath=page.SEARCH_BUTTON)
+    #page.click(xpath=page.SEARCH_BUTTON)
 
     # Открыть каталок
     page.click(xpath=page.CATALOG_BUTTON)
 
-    # Выбрать Электроника
-    page.click(xpath=page.click_section_by_name(section_name='Книги'))
+    # Выбрать Электроника -> Смартфоны
+
+    page.navigation_selection(section_name='Электроника', section_button_name='Смартфоны')
+    #page.click(page.SHOW_ALL_BRANDS)
+    #page.select_checkbox_brand_name(brand_name="Samsung")
+    page.click(page.SAMSUNG_CHECKBOX)
 
     time.sleep(10)
 
-    print()
+    page.quit_browser()

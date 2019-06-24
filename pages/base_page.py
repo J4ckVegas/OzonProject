@@ -75,7 +75,7 @@ class BasePage:
         action_chains = ActionChains(self.driver)
         action_chains.move_to_element(element).click().perform()
 
-    def click_section_by_name(self, section_name):
+    def click_section_by_name(self, section_name: str):
         """Метод нажатия кнопки на сайте, с определенным текстом
 
         :param button_name: Текст на кнопке
@@ -96,3 +96,18 @@ class BasePage:
         :param value: секунд
         """
         time.sleep(value)
+
+    def navigation_selection(self, section_name, section_button_name):
+
+        xpath_menu = self.CATALOG_SECTION.format(section_name=section_name)
+        xpath_button = self.CATALOG_SECTION_BUTTON.format(section_button_name=section_button_name)
+        add = self.driver.find_element(By.XPATH, xpath_menu)
+        hover = ActionChains(self.driver).move_to_element(add)
+        hover.perform()
+        section_button = self.driver.find_element(By.XPATH, xpath_button)
+        section_button.click()
+
+    def select_checkbox_brand_name(self, brand_name):
+        xpath = self.CHECKBOX_BRAND_NAME.format(brand_name=brand_name)
+        element = self.driver.find_element(By.XPATH, xpath)
+        element.click()
