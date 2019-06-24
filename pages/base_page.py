@@ -107,6 +107,16 @@ class BasePage:
         section_button = self.driver.find_element(By.XPATH, xpath_button)
         section_button.click()
 
+    def sort_by_name(self, sort_name):
+
+        xpath_sorting = self.SORTING_SELECTION
+        xpath_button = self.SORTING_BY_NAME.format(sort_name=sort_name)
+        add = self.driver.find_element(By.XPATH, xpath_sorting)
+        hover = ActionChains(self.driver).move_to_element(add)
+        hover.click()
+        section_button = self.driver.find_element(By.XPATH, xpath_button)
+        section_button.click()
+
     def select_checkbox_brand_name(self, brand_name):
         xpath = self.CHECKBOX_BRAND_NAME.format(brand_name=brand_name)
         element = self.driver.find_element(By.XPATH, xpath)

@@ -32,7 +32,12 @@ def test_ozon():
     page.navigation_selection(section_name='Электроника', section_button_name='Смартфоны')
     #page.click(page.SHOW_ALL_BRANDS)
     #page.select_checkbox_brand_name(brand_name="Samsung")
-    page.click(page.SAMSUNG_CHECKBOX)
+    page.click(page.SELECT_ITEM_FROM_BURG)
+    #page.click(page.SAMSUNG_CHECKBOX)
+
+    #page.sort_by_name(sort_name="Сначала дорогие")
+    #page.click(page.SORTING_MENU)
+    #page.click(page.SORT_BY_BY)
 
     time.sleep(10)
 
