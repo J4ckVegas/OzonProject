@@ -16,9 +16,9 @@ def test_ozon():
     driver.maximize_window()
 
     driver.get('https://ozon.ru')
+    page = OzonMainPage(driver=driver)
 
     # Заполнить поле поиска
-    page = OzonMainPage(driver=driver)
     #page.fill_input(xpath=page.INPUT_SEARCH, value='Xiaomi')
 
     # Кликнуть кнопку найти
@@ -27,17 +27,17 @@ def test_ozon():
     # Открыть каталок
     page.click(xpath=page.CATALOG_BUTTON)
 
-    # Выбрать Электроника -> Смартфоны
-
+    # В Разделах выбрать Электроника -> Смартфоны
     page.navigation_selection(section_name='Электроника', section_button_name='Смартфоны')
-    #page.click(page.SHOW_ALL_BRANDS)
-    #page.select_checkbox_brand_name(brand_name="Samsung")
-    page.click(page.SELECT_ITEM_FROM_BURG)
-    #page.click(page.SAMSUNG_CHECKBOX)
 
-    #page.sort_by_name(sort_name="Сначала дорогие")
-    #page.click(page.SORTING_MENU)
-    #page.click(page.SORT_BY_BY)
+    # Установить фильтр по производителю
+    page.select_checkbox_brand_name(brand_name='Samsung')
+
+    # Сортировать по цене
+    page.sorting_by_name('Сначала дорогие')
+
+    page.click(xpath='//div[@class="tile m-default"][@data-index="0"]')
+    page.click(xpath='//div[@class= "tile"][@index="0"]')
 
     time.sleep(10)
 

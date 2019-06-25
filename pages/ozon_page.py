@@ -8,17 +8,15 @@ class OzonMainPage(BasePage):
     CATALOG_BUTTON = '//div[@class="catalog-button"]'
     CATALOG_SECTION = '//*[@data-test-category-name="{section_name}"]'
     CATALOG_SECTION_BUTTON = '//*[@data-test-category-name="{section_button_name}"]'
-    CHECKBOX_BRAND_NAME = '//*[contains(text(), "{brand_name}")]/ancestor::label[contains(@data-test-id, "filter-block-brand-item")]'
-    SHOW_ALL_BRANDS = '//*[contains(text(), "Посмотреть все")][@data-test-id="filter-block-brand-show-all"]/..'
-    SORTING_SELECTION = '//div[@class="select sorting-select"]'
-    SORTING_BY_NAME = '//*[contains(text(), "{sort_name}")][@role="option"]'
 
-    #SAMSUNG_CHECKBOX = '//*[contains(text(), "Samsung")]/ancestor::label[contains(@data-test-id, "filter-block-brand-item")]//input'
-    SAMSUNG_CHECKBOX = '//*[contains(text(), "Samsung")][@class="left-menu-item"]'
-    CATALOG_ELECTRONICS = '//*[@data-test-category-name="Электроника"]'
-    SECTION_BUTTON_BOOK = '//*[@data-test-category-name="Книги"]'
-    SECTION_MOBILE_PHONES = '//*[@data-test-category-name="Смартфоны"]'
-    SELECT_ITEM_FROM_BURG = '//*[contains(text(), "Товары из-за рубежа")]/ancestor::label[contains(@class, "checkbox-label")]/..'
+    """Brand-Filters"""
+    FILTER_BLOCK_BRAND = '//div[@data-test-id="filter-block-brand"]'
+    CHECKBOX_BRAND_NAME = '//*[contains(text(), "{brand_name}")]/preceding-sibling::span[@class="checkmark"]'
+    SHOW_ALL_BRANDS = '//*[@data-test-id="filter-block-brand-show-all"]'
+    SEARCH_BRAND_INPUT = '//div[@data-test-id="filter-block-brand"]//input[@type="text"][@class="input"]'
+    """Brand-Filters"""
 
-    SORTING_MENU = '//div[@class="select sorting-select"]'
-    SORT_BY_BY = '//*[contains(text(), "Сначала дорогие")][@role="option"]'
+    """Sorting"""
+    SORTING_SELECT = '//div[@class="select sorting-select"]'
+    SORTING_BY_NAME = '//*[contains(text(), "{sorting_method}")][@role="option"]'
+    """Sorting"""

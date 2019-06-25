@@ -107,17 +107,37 @@ class BasePage:
         section_button = self.driver.find_element(By.XPATH, xpath_button)
         section_button.click()
 
-    def sort_by_name(self, sort_name):
-
-        xpath_sorting = self.SORTING_SELECTION
-        xpath_button = self.SORTING_BY_NAME.format(sort_name=sort_name)
-        add = self.driver.find_element(By.XPATH, xpath_sorting)
-        hover = ActionChains(self.driver).move_to_element(add)
-        hover.click()
-        section_button = self.driver.find_element(By.XPATH, xpath_button)
-        section_button.click()
-
     def select_checkbox_brand_name(self, brand_name):
+        scroll_page = self.driver.find_element(By.XPATH, self.FILTER_BLOCK_BRAND)
+        self.driver.execute_script("arguments[0].scrollIntoView();", scroll_page)
+
+        try:
+            show_all_brands = self.driver.find_element(By.XPATH, self.SHOW_ALL_BRANDS)
+            ActionChains(self.driver).move_to_element(show_all_brands).click().perform()
+
+        except Exception:
+            pass
+
+        search_input = self.get_element(xpath=self.SEARCH_BRAND_INPUT)
+        search_input.clear()
+        search_input.send_keys(brand_name)
+
         xpath = self.CHECKBOX_BRAND_NAME.format(brand_name=brand_name)
-        element = self.driver.find_element(By.XPATH, xpath)
-        element.click()
+        brand_checkbox = self.driver.find_element(By.XPATH, xpath)
+        ActionChains(self.driver).move_to_element(brand_checkbox).click().perform()
+
+        time.sleep(10)
+
+    def sorting_by_name(self, sorting_method):
+
+        scroll_page = self.driver.find_element(By.XPATH, self.SORTING_SELECT)
+        self.driver.execute_script("arguments[0].scrollIntoView();", scroll_page)
+
+        sort_select = self.driver.find_element(By.XPATH, self.SORTING_SELECT)
+        ActionChains(self.driver).move_to_element(sort_select).click().perform()
+
+        sort_by = self.SORTING_BY_NAME.format(sorting_method=sorting_method)
+        sort_method = self.driver.find_element(By.XPATH, sort_by)
+        ActionChains(self.driver).move_to_element(sort_method).click().perform()
+
+        time.sleep(10)
