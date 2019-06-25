@@ -36,9 +36,10 @@ def test_ozon():
     # Сортировать по цене
     page.sorting_by_name('Сначала дорогие')
 
-    page.click(xpath='//div[@class="tile m-default"][@data-index="0"]')
-    page.click(xpath='//div[@class= "tile"][@index="0"]')
-
+    #page.click(xpath='//div[@class="tile m-default"][@data-index="0"]')
+    #page.click(xpath=page.add_to_cart)
+    page.add_to_cart(value='10')
+    page.go_to_cart()
     time.sleep(10)
-
-    page.quit_browser()
+    page.total_amount()
+    page.comparison_price_and_total_amount()

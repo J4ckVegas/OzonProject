@@ -8,6 +8,7 @@ class OzonMainPage(BasePage):
     CATALOG_BUTTON = '//div[@class="catalog-button"]'
     CATALOG_SECTION = '//*[@data-test-category-name="{section_name}"]'
     CATALOG_SECTION_BUTTON = '//*[@data-test-category-name="{section_button_name}"]'
+    CART = '//span[text()="Корзина"]'
 
     """Brand-Filters"""
     FILTER_BLOCK_BRAND = '//div[@data-test-id="filter-block-brand"]'
@@ -20,3 +21,12 @@ class OzonMainPage(BasePage):
     SORTING_SELECT = '//div[@class="select sorting-select"]'
     SORTING_BY_NAME = '//*[contains(text(), "{sorting_method}")][@role="option"]'
     """Sorting"""
+
+    """Item add to cart"""
+    ADD_TO_CART = '//div[@class= "tile"][@index="{value}"]//button/..'
+
+    ITEM_PRICE_PRICE = '//div[@class= "tile"][@index="{value}"]//span[@class="main"]'
+    CART_TOTAL_AMOUNT = '//span[@class="price"]//span[@class="main"]'
+
+    ITEM_PRICE = '{item_price}'
+    TOTAL_AMOUNT = '{total_amount}'

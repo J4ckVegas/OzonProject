@@ -126,7 +126,7 @@ class BasePage:
         brand_checkbox = self.driver.find_element(By.XPATH, xpath)
         ActionChains(self.driver).move_to_element(brand_checkbox).click().perform()
 
-        time.sleep(10)
+        time.sleep(5)
 
     def sorting_by_name(self, sorting_method):
 
@@ -140,4 +140,30 @@ class BasePage:
         sort_method = self.driver.find_element(By.XPATH, sort_by)
         ActionChains(self.driver).move_to_element(sort_method).click().perform()
 
-        time.sleep(10)
+        time.sleep(5)
+
+    def add_to_cart(self, value):
+        xpath = self.ADD_TO_CART.format(value=value)
+        scroll_page = self.driver.find_element(By.XPATH, xpath)
+        self.driver.execute_script("arguments[0].scrollIntoView();", scroll_page)
+
+        item_price_xpath = self.ITEM_PRICE_PRICE.format(value=value).text
+        item_price = self.driver.find_element(By.XPATH, item_price_xpath).text
+        self.ITEM_PRICE.format(item_price=item_price)
+
+        button_add_to_cart = self.driver.find_element(By.XPATH, xpath)
+        ActionChains(self.driver).move_to_element(button_add_to_cart).click().perform()
+
+    def go_to_cart(self):
+        scroll_page = self.driver.find_element(By.XPATH, self.CART)
+        self.driver.execute_script("arguments[0].scrollIntoView();", scroll_page)
+        button_cart = self.driver.find_element(By.XPATH, self.CART)
+        ActionChains(self.driver).move_to_element(button_cart).click().perform()
+
+    def total_amount(self):
+        cart_total_amount = self.driver.find_element(By.XPATH, '//span[@class="price"]//span[@class="main"]').text
+        self.TOTAL_AMOUNT.format(total_amount=cart_total_amount)
+
+    def comparison_price_and_total_amount(self):
+        if self.ITEM_PRICE == self.TOTAL_AMOUNT:
+            self.driver.quit()
