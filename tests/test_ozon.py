@@ -18,12 +18,6 @@ def test_ozon():
     driver.get('https://ozon.ru')
     page = OzonMainPage(driver=driver)
 
-    # Заполнить поле поиска
-    #page.fill_input(xpath=page.INPUT_SEARCH, value='Xiaomi')
-
-    # Кликнуть кнопку найти
-    #page.click(xpath=page.SEARCH_BUTTON)
-
     # Открыть каталок
     page.click(xpath=page.CATALOG_BUTTON)
 
@@ -36,10 +30,9 @@ def test_ozon():
     # Сортировать по цене
     page.sorting_by_name('Сначала дорогие')
 
-    #page.click(xpath='//div[@class="tile m-default"][@data-index="0"]')
-    #page.click(xpath=page.add_to_cart)
-    page.add_to_cart(value='10')
+    page.add_to_cart(value='0')
     page.go_to_cart()
     time.sleep(10)
     page.total_amount()
     page.comparison_price_and_total_amount()
+    time.sleep(15)

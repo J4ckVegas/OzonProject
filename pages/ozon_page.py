@@ -23,10 +23,7 @@ class OzonMainPage(BasePage):
     """Sorting"""
 
     """Item add to cart"""
-    ADD_TO_CART = '//div[@class= "tile"][@index="{value}"]//button/..'
+    ADD_TO_CART = '//div[@class= "tile"][@index="0"]//button[@data-test-id="tile-buy-button"]'
 
-    ITEM_PRICE_PRICE = '//div[@class= "tile"][@index="{value}"]//span[@class="main"]'
+    ITEM_SCAN_PRICE = '//div[@class= "tile"][@index="{value}"]//span[@class="main"]'
     CART_TOTAL_AMOUNT = '//span[@class="price"]//span[@class="main"]'
-
-    ITEM_PRICE = '{item_price}'
-    TOTAL_AMOUNT = '{total_amount}'
