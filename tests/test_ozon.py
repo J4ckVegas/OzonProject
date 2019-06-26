@@ -32,7 +32,6 @@ def test_ozon():
 
     page.add_to_cart(value='0')
     page.go_to_cart()
-    time.sleep(10)
-    page.total_amount()
+
     page.comparison_price_and_total_amount()
     time.sleep(15)

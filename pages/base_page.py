@@ -98,6 +98,11 @@ class BasePage:
         time.sleep(value)
 
     def navigation_selection(self, section_name, section_button_name):
+        """ Навикация по разделам
+
+        :param section_name: Основной раздел
+        :param section_button_name: Подраздел
+        """
 
         xpath_menu = self.CATALOG_SECTION.format(section_name=section_name)
         xpath_button = self.CATALOG_SECTION_BUTTON.format(section_button_name=section_button_name)
@@ -108,6 +113,11 @@ class BasePage:
         section_button.click()
 
     def select_checkbox_brand_name(self, brand_name):
+        """Установить фильтр на бренд
+
+
+        :param brand_name: Наименование бренда
+        """
         scroll_page = self.driver.find_element(By.XPATH, self.FILTER_BLOCK_BRAND)
         self.driver.execute_script("arguments[0].scrollIntoView();", scroll_page)
 
@@ -126,9 +136,14 @@ class BasePage:
         brand_checkbox = self.driver.find_element(By.XPATH, xpath)
         ActionChains(self.driver).move_to_element(brand_checkbox).click().perform()
 
-        time.sleep(10)
+        time.sleep(5)
 
     def sorting_by_name(self, sorting_method):
+        """Соритровать по указанному методу
+
+
+        :param sorting_method: Метод сортировки
+        """
 
         scroll_page = self.driver.find_element(By.XPATH, self.SORTING_SELECT)
         self.driver.execute_script("arguments[0].scrollIntoView();", scroll_page)
@@ -140,9 +155,14 @@ class BasePage:
         sort_method = self.driver.find_element(By.XPATH, sort_by)
         ActionChains(self.driver).move_to_element(sort_method).click().perform()
 
-        time.sleep(10)
+        time.sleep(5)
 
     def add_to_cart(self, value):
+        """Добавить элемент в корзину
+
+
+        :param value: Порядковый номер элемента каталлога
+        """
         xpath = self.ADD_TO_CART.format(value=value)
         scroll_page = self.driver.find_element(By.XPATH, xpath)
         self.driver.execute_script("arguments[0].scrollIntoView();", scroll_page)
@@ -155,23 +175,40 @@ class BasePage:
         ActionChains(self.driver).move_to_element(button_add_to_cart).click().perform()
 
     def go_to_cart(self):
+        """Переход в корзину
+
+
+        """
         scroll_page = self.driver.find_element(By.XPATH, self.CART)
         self.driver.execute_script("arguments[0].scrollIntoView();", scroll_page)
         button_cart = self.driver.find_element(By.XPATH, self.CART)
         ActionChains(self.driver).move_to_element(button_cart).click().perform()
+        time.sleep(5)
+        global cart_total_amount
+        cart_total_amount = self.driver.find_element(By.XPATH, '//span[@class="price"]//span[@class="main"]').text
 
     def total_amount(self):
+        """Получение стоимости в корзине
+
+
+        """
         global cart_total_amount
         cart_total_amount = self.driver.find_element(By.XPATH, '//span[@class="price"]//span[@class="main"]').text
 
     def comparison_price_and_total_amount(self):
+        """Сравнение цены в каталоке и суммы в корзине
+
+
+        """
         if item_price == cart_total_amount:
             scroll_page = self.driver.find_element(By.XPATH, self.INPUT_SEARCH)
             self.driver.execute_script("arguments[0].scrollIntoView();", scroll_page)
             element = self.get_element(xpath=self.INPUT_SEARCH)
             element.send_keys('Суммы равны! Победа! А озон фу!')
+            time.sleep(15)
         else:
             scroll_page = self.driver.find_element(By.XPATH, self.INPUT_SEARCH)
             self.driver.execute_script("arguments[0].scrollIntoView();", scroll_page)
             element = self.get_element(xpath=self.INPUT_SEARCH)
             element.send_keys(item_price, ' не равно ', cart_total_amount, 'Хнык!')
+            time.sleep(15)
